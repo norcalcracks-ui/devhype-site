@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pre-Launch Checklist for Vibe-Coded Apps (Free, 2026) — Launch Check</title>
+<meta name="description" content="A free pre-launch audit checklist for AI-built and vibe-coded apps: security, payments, SEO, legal pages, copy and mobile. Check everything before you post your launch.">
+<link rel="canonical" href="https://devhype.info/prelaunch-checklist.html">
+<meta property="og:type" content="article"><meta property="og:title" content="The Whole-Launch Checklist for Vibe-Coded Apps">
+<meta property="og:description" content="Security is step one. This free checklist also covers payments, SEO, legal pages, copy and mobile.">
+<meta property="og:url" content="https://devhype.info/prelaunch-checklist.html"><meta name="twitter:card" content="summary">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1a1a;line-height:1.6;background:#fafafa}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}header{background:#111;color:#fff;padding:14px 0}header a{color:#fff;text-decoration:none;margin-left:18px}header .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.hero{background:linear-gradient(135deg,#111,#2b2f77);color:#fff;padding:70px 0;text-align:center}.hero h1{font-size:2.4rem;margin:0 0 12px}
+section{padding:50px 0}h2{font-size:1.8rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:22px}.price{font-size:1.8rem;font-weight:700}
+.btn{display:inline-block;background:#4f46e5;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:10px}.btn:hover{background:#3730a3}
+.alt{background:#fff;border-top:1px solid #eee;border-bottom:1px solid #eee}.feat{border:2px solid #4f46e5}
+footer{background:#111;color:#bbb;padding:24px 0;font-size:.9rem}footer a{color:#ddd}small{color:#666}
+ol.check>li{margin-bottom:14px}ol.check .how{display:block;color:#444}.toc a{margin-right:14px}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a pre-launch audit for a vibe-coded app?","acceptedAnswer":{"@type":"Answer","text":"A pass over your live site and code before you announce it, looking for the problems AI coding tools commonly leave behind: exposed keys, open database rules, broken checkout, missing SEO tags, absent legal pages, leftover draft text and mobile layout issues."}},
+{"@type":"Question","name":"Is security the only thing I need to check before launch?","acceptedAnswer":{"@type":"Answer","text":"No. A secure app that cannot take payment, is set to noindex, or still shows TODO text will still have a bad launch. This checklist covers security, payments, SEO, legal pages, copy and mobile."}},
+{"@type":"Question","name":"Can I run this checklist myself?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every item includes how to check it with free tools such as your browser dev tools, curl and git. The paid Standard Audit runs the same checks for you and ranks the fixes."}},
+{"@type":"Question","name":"What does the $49 Standard Audit include?","acceptedAnswer":{"@type":"Answer","text":"A full audit of your site and, optionally, your repo, with a one-page report giving a No-go, Go with fixes or Go verdict and a ranked list of fixes, delivered within 24 hours."}},
+{"@type":"Question","name":"Do you need access to my repository?","acceptedAnswer":{"@type":"Answer","text":"No. A site-only audit works. Read-only repo access adds the secret-scanning and database-rule checks."}}]}
+</script></head><body>
+<header><div class="wrap"><strong><a href="index.html" style="margin:0">Dev Hype</a></strong><nav><a href="index.html#launch-check">Launch Check</a><a href="index.html#dev-hype">Dev Hype</a><a href="samples.html">Samples</a><a href="index.html#bundle">Bundle</a><a href="index.html#contact">Contact</a></nav></div></header>
+<div class="hero"><div class="wrap"><h1>The Pre-Launch Checklist for Vibe-Coded Apps</h1><p>Built it with Cursor, Claude, Lovable, Bolt or v0? Most launch checklists stop at security. This one covers the whole launch: security, payments, SEO, legal pages, copy and mobile.</p><a class="btn" href="#security">Start the checklist</a> <a class="btn" href="#audit" style="background:#fff;color:#111">Get it checked for $49</a></div></div>
+
+<section><div class="wrap"><h2>How to use this checklist</h2><p>Work through it on your production URL, not localhost. Each item has a short <strong>why</strong> and a <strong>how to check</strong>. Anything in Security or Payments that fails is a launch blocker; the rest you can fix in your first week if you must.</p>
+<p class="toc"><strong>Jump to:</strong> <a href="#security">1. Security</a><a href="#payments">2. Payments</a><a href="#seo">3. SEO &amp; indexing</a><a href="#legal">4. Legal pages</a><a href="#copy">5. Copy</a><a href="#mobile">6. Mobile &amp; accessibility</a><a href="#faq">FAQ</a></p></div></section>
+
+<section id="security" class="alt"><div class="wrap"><h2>1. Security: keys, data and access</h2><ol class="check">
+<li><strong>No secret keys in your code or git history.</strong> AI tools often paste keys inline to "just make it work", and deleting them later leaves them in history. <span class="how">How to check: run a free scanner such as gitleaks or trufflehog over the whole repo history. If anything real turns up, rotate the key first, then clean history.</span></li>
+<li><strong>No server secrets shipped to the browser.</strong> Anything prefixed <code>NEXT_PUBLIC_</code>, <code>VITE_</code> or <code>REACT_APP_</code> is bundled into public JavaScript. <span class="how">How to check: open your live site, view the JS bundles in dev tools (Sources), and search for <code>sk_</code>, <code>service_role</code>, <code>secret</code> and your provider names.</span></li>
+<li><strong>No <code>.env</code> or config files served publicly.</strong> A misplaced file in the public folder is readable by anyone. <span class="how">How to check: on your own domain, request <code>/.env</code>, <code>/.env.local</code> and <code>/.git/config</code>. Each should return 404, not file contents. Also confirm <code>.env*</code> is in <code>.gitignore</code>.</span></li>
+<li><strong>Database rules actually restrict access.</strong> Supabase tables without Row Level Security, or Firebase rules like <code>allow read, write: if true</code>, let anyone with your public key read or edit everything. <span class="how">How to check: in Supabase, confirm RLS is enabled on every table in the exposed schema and each has policies. In Firebase, read your Firestore/Storage rules and test them in the Rules Playground as a signed-out user.</span></li>
+<li><strong>Users can only see their own data (no IDOR).</strong> Endpoints like <code>/api/orders/123</code> often trust the ID in the URL. <span class="how">How to check: sign in as user A, note a record ID, sign in as user B in another browser, and request A's record. You should get 403 or 404.</span></li>
+<li><strong>Auth is enforced on the server, not just hidden in the UI.</strong> Hiding an admin button doesn't protect the admin API. <span class="how">How to check: call your protected API routes with no session cookie or token (curl or dev tools) and confirm they refuse.</span></li>
+<li><strong>CORS is not wide open on authenticated APIs.</strong> <code>Access-Control-Allow-Origin: *</code> combined with credentials is a common copy-paste fix. <span class="how">How to check: inspect API response headers in dev tools (Network). Allowed origins should be your own domains.</span></li>
+<li><strong>Rate limits on login, signup and expensive endpoints.</strong> Without them, anyone can brute-force passwords or run up your AI API bill. <span class="how">How to check: send a burst of requests to the endpoint (on your own app only) and confirm you start getting 429 responses.</span></li>
+<li><strong>Basic security headers are set.</strong> HSTS, Content-Security-Policy, X-Content-Type-Options and a frame policy are cheap to add. <span class="how">How to check: run <code>curl -I https://yourdomain</code> and look for <code>strict-transport-security</code>, <code>content-security-policy</code>, <code>x-content-type-options</code> and <code>x-frame-options</code> or CSP <code>frame-ancestors</code>.</span></li>
+</ol></div></section>
+
+<section id="payments"><div class="wrap"><h2>2. Payments: working end to end</h2><ol class="check" start="10">
+<li><strong>Every buy button goes to a real checkout.</strong> Placeholder links and <code>href="#"</code> are easy to miss. <span class="how">How to check: click every pricing and upgrade button on the live site and confirm each opens the right product at the right price.</span></li>
+<li><strong>A full test purchase succeeds.</strong> <span class="how">How to check: use your provider's test mode and test card, complete checkout, and confirm you land on a working success page.</span></li>
+<li><strong>Webhooks unlock what the customer paid for.</strong> If the webhook fails, people pay and get nothing. <span class="how">How to check: after the test purchase, confirm the account or order updated, and check the provider's webhook log for successful (2xx) deliveries. Verify you check the webhook signature.</span></li>
+<li><strong>Receipts and confirmation emails arrive.</strong> <span class="how">How to check: use a real inbox for the test purchase and confirm the receipt arrives and isn't in spam.</span></li>
+<li><strong>Refunds and cancellations work.</strong> <span class="how">How to check: refund the test order and cancel a test subscription; confirm access is removed or kept according to your own policy.</span></li>
+<li><strong>Live keys in production, test keys everywhere else.</strong> Launching in test mode means nobody can actually pay. <span class="how">How to check: confirm production env vars use live keys and the live webhook endpoint, then make one small real purchase and refund it.</span></li>
+</ol></div></section>
+
+<section id="seo" class="alt"><div class="wrap"><h2>3. SEO and indexing</h2><ol class="check" start="16">
+<li><strong>No leftover <code>noindex</code>.</strong> Staging settings sometimes ship to production and keep you out of search entirely. <span class="how">How to check: view source and search for <code>noindex</code>; also check the <code>X-Robots-Tag</code> response header.</span></li>
+<li><strong>Unique title and meta description on every page.</strong> Templates often leave "Vite App" or "Create Next App". <span class="how">How to check: view source on each key page and read the <code>&lt;title&gt;</code> and <code>meta name="description"</code>.</span></li>
+<li><strong>Link previews look right.</strong> Your launch post will be judged by its preview card. <span class="how">How to check: confirm <code>og:title</code>, <code>og:description</code> and <code>og:image</code> are set, then paste your URL into a private chat or post draft to preview it.</span></li>
+<li><strong>robots.txt doesn't block the site.</strong> <span class="how">How to check: open <code>/robots.txt</code> and make sure there's no <code>Disallow: /</code> for all user agents.</span></li>
+<li><strong>A sitemap exists and lists real URLs.</strong> <span class="how">How to check: open <code>/sitemap.xml</code>, confirm it uses your production domain, and submit it in Google Search Console.</span></li>
+<li><strong>Canonical tags point to the right domain.</strong> A canonical pointing at a preview URL tells search engines to index the wrong site. <span class="how">How to check: search the source for <code>rel="canonical"</code> and confirm it uses your live domain.</span></li>
+</ol></div></section>
+
+<section id="legal"><div class="wrap"><h2>4. Legal pages</h2><p><small>This is a practical checklist, not legal advice.</small></p><ol class="check" start="22">
+<li><strong>Privacy policy that matches what you actually collect.</strong> Payment providers and app stores generally expect one. <span class="how">How to check: list every tool that touches user data (auth, analytics, email, payments, AI APIs) and confirm the policy mentions each.</span></li>
+<li><strong>Terms of service.</strong> <span class="how">How to check: confirm a terms page exists, is linked in the footer, and names your product and contact details.</span></li>
+<li><strong>Refund policy, if you charge.</strong> Buyers look for it, and payment providers may ask for one. <span class="how">How to check: make sure it's linked from your pricing page and matches what your payment setup actually does.</span></li>
+<li><strong>Cookie notice where it's needed.</strong> If you use non-essential cookies or tracking and have visitors in regions that require consent, you need a notice. <span class="how">How to check: open the site in a fresh private window, look at cookies set in dev tools (Application), and confirm your notice covers them.</span></li>
+<li><strong>Legal links actually work.</strong> A footer word "Privacy" with no link doesn't count. <span class="how">How to check: click each footer link and confirm it loads a real page.</span></li>
+</ol></div></section>
+
+<section id="copy" class="alt"><div class="wrap"><h2>5. Copy: what visitors actually read</h2><ol class="check" start="27">
+<li><strong>No leftover TODO, DRAFT or lorem ipsum.</strong> AI-generated pages often contain notes to yourself. <span class="how">How to check: search your source and rendered pages for <code>TODO</code>, <code>DRAFT</code>, <code>lorem</code>, <code>placeholder</code>, <code>example.com</code> and <code>[</code>brackets<code>]</code>.</span></li>
+<li><strong>No dead calls to action.</strong> Buttons that go nowhere lose the visitors you worked hardest to get. <span class="how">How to check: click every button and link, including ones that only appear after JavaScript loads, and run a broken-link checker.</span></li>
+<li><strong>Every claim is one you can back up.</strong> Invented user counts, fake testimonials and "trusted by" logos damage trust and can create legal risk. <span class="how">How to check: read each number, quote and logo and ask, "Could I prove this today?" If not, cut it.</span></li>
+<li><strong>The page says what it does in one line.</strong> <span class="how">How to check: show the top of your page to someone for five seconds and ask what the product does.</span></li>
+</ol></div></section>
+
+<section id="mobile"><div class="wrap"><h2>6. Mobile and accessibility</h2><ol class="check" start="31">
+<li><strong>Layout works on a phone.</strong> A lot of launch-day traffic comes from social apps on mobile. <span class="how">How to check: use dev tools device mode at 375px wide, then test on a real phone. Look for sideways scrolling and cut-off buttons.</span></li>
+<li><strong>Signup and checkout work on mobile.</strong> <span class="how">How to check: complete the full signup and test checkout on a phone.</span></li>
+<li><strong>Images have alt text and form fields have labels.</strong> <span class="how">How to check: run Lighthouse's accessibility audit in Chrome dev tools and fix the flagged items.</span></li>
+<li><strong>Text is readable and keyboard navigation works.</strong> <span class="how">How to check: Tab through the page and confirm you can reach and see focus on every control; Lighthouse also flags low contrast.</span></li>
+<li><strong>The page loads fast enough.</strong> <span class="how">How to check: run Lighthouse in mobile mode and address the largest images and blocking scripts first.</span></li>
+</ol></div></section>
+
+<section id="audit" class="alt"><div class="wrap"><h2>Don't want to run 35 checks yourself?</h2><p>Launch Check runs this checklist against your site and, if you choose, your repo, then tells you what to fix first.</p>
+<div class="grid">
+<div class="card"><h3>Free mini-check</h3><div class="price">$0</div><p>A quick pass over your public site for the most common launch problems.</p><span class="btn" style="opacity:.55;cursor:default">Coming soon</span></div>
+<div class="card feat"><h3>Standard Audit</h3><div class="price">$49</div><p>Full site + repo audit with a one-page report: a No-go / Go with fixes / Go verdict and a ranked fix list you can paste into your AI coding tool. Delivered within 24 hours.</p><a class="btn" href="https://buy.stripe.com/28EcMX0U81SCgE64Pg6AM06">Buy Standard Audit</a><p style="font-size:.9em;opacity:.75">Secure checkout by Stripe. Every report is reviewed by a person before it goes out, and any copy of your repo we take for the audit is deleted once the audit is done.</p></div>
+</div></div></section>
+
+<section id="faq"><div class="wrap"><h2>FAQ</h2>
+<h3>What is a pre-launch audit for a vibe-coded app?</h3><p>A pass over your live site and code before you announce it, looking for the problems AI coding tools commonly leave behind: exposed keys, open database rules, broken checkout, missing SEO tags, absent legal pages, leftover draft text and mobile layout issues.</p>
+<h3>Is security the only thing I need to check before launch?</h3><p>No. A secure app that can't take payment, is set to noindex, or still shows TODO text will still have a bad launch.</p>
+<h3>Can I run this checklist myself?</h3><p>Yes. Every item includes how to check it with free tools like browser dev tools, curl and git. The Standard Audit runs the same checks for you and ranks the fixes.</p>
+<h3>What does the $49 Standard Audit include?</h3><p>A full audit of your site and, optionally, your repo, with a one-page report giving a verdict and a ranked list of fixes, delivered within 24 hours.</p>
+<h3>Do you need access to my repository?</h3><p>No. A site-only audit works. Read-only repo access adds the secret-scanning and database-rule checks.</p>
+</div></section>
+<footer><div class="wrap">© Dev Hype · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div></footer>
+</body></html>
