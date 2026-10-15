@@ -8,22 +8,24 @@ section{padding:50px 0}h2{font-size:1.8rem}.grid{display:grid;grid-template-colu
 .alt{background:#fff;border-top:1px solid #eee;border-bottom:1px solid #eee}.feat{border:2px solid #4f46e5}
 footer{background:#111;color:#bbb;padding:24px 0;font-size:.9rem}footer a{color:#ddd}small{color:#666}
 .kit table{border-collapse:collapse;width:100%}.kit td,.kit th{border:1px solid #e3e3e3;padding:6px 10px;text-align:left}.kit blockquote{margin:0 0 16px;padding:10px 16px;background:#fff7e6;border-left:4px solid #f59e0b}.kit code{background:#f1f1f1;padding:1px 4px;border-radius:4px}
+.jump{background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:14px 18px;margin-top:14px}.jump a{margin:0 4px}
+.kitsec{border-top:4px solid #4f46e5;background:#fff;margin-top:28px}.kitsec:nth-of-type(odd){background:#f4f4fb}.kit-title{font-size:2rem;margin:0 0 6px;color:#2b2f77}.lede{font-size:1.15rem;margin-top:0}
 </style></head><body><header><div class="wrap"><strong><a href="index.html" style="margin:0">Dev Hype</a></strong><nav><a href="index.html#launch-check">Launch Check</a><a href="index.html#dev-hype">Dev Hype</a><a href="index.html#bundle">Bundle</a><a href="index.html#contact">Contact</a></nav></div></header>
-<div class="hero"><div class="wrap"><h1>Sample launch kits</h1><p>How we'd launch three real open-source releases, written only from their public READMEs and release notes.</p><a class="btn" href="#hyperfine">hyperfine</a> <a class="btn" href="#uv">uv</a> <a class="btn" href="#gum">gum</a></div></div>
-<section><div class="wrap"><p><strong>These are unofficial samples.</strong> They were not written, reviewed, or endorsed by the projects' maintainers, and Dev Hype is not affiliated with them. Nothing here has been posted anywhere.</p></div></section>
-<section id="hyperfine" class="alt"><div class="wrap kit"><h1>Here's how we'd launch hyperfine v2.0.0</h1>
+<div class="hero" id="top"><div class="wrap"><h1>Sample launch kits</h1><p>How we'd launch three real open-source releases, written only from their public READMEs and release notes.</p><a class="btn" href="#hyperfine">hyperfine</a> <a class="btn" href="#uv">uv</a> <a class="btn" href="#gum">gum</a></div></div>
+<section><div class="wrap"><p><strong>These are unofficial samples.</strong> They were not written, reviewed, or endorsed by the projects' maintainers, and Dev Hype is not affiliated with them. Nothing here has been posted anywhere.</p><nav class="jump" aria-label="Sample kits"><strong>Jump to a kit:</strong> <a href="#hyperfine">hyperfine v2.0.0</a> · <a href="#uv">uv 0.13.1</a> · <a href="#gum">gum v2.0.2</a></nav></div></section>
+<section id="hyperfine" class="kitsec"><div class="wrap kit"><h2 class="kit-title">hyperfine v2.0.0</h2><p class='lede'>Here's how we'd launch hyperfine v2.0.0.</p>
 <blockquote>
 <p><strong>Unofficial sample: not written, reviewed, or endorsed by the hyperfine maintainers. Not affiliated.</strong>
 Based only on the public README and release notes: <a rel="noopener" href="https://github.com/sharkdp/hyperfine">https://github.com/sharkdp/hyperfine</a> · <a rel="noopener" href="https://github.com/sharkdp/hyperfine/releases/tag/v2.0.0">release notes</a>. Drafts below are written as suggestions for the maintainers; Dev Hype has not posted any of them.</p>
 </blockquote>
-<h2>Positioning brief</h2>
+<h3>Positioning brief</h3>
 <ul>
 <li>For: developers who benchmark CLI tools, builds, and scripts.</li>
 <li>Problem: one-off <code>time</code> runs are noisy; caches and shell overhead skew results.</li>
 <li>Hook: hyperfine 2.0 measures more than time — peak memory and hardware counters, out of the box.</li>
 <li>Proof: statistical analysis over many runs, warmup/prepare commands, outlier detection, parameter scans, exports to CSV/JSON/Markdown/AsciiDoc (README). v2.0.0: <code>--metrics</code>, <code>--env</code>, direct execution by default, JSON schema v2 (release notes).</li>
 </ul>
-<h2>X thread (draft for the maintainers to post)</h2>
+<h3>X thread (draft for the maintainers to post)</h3>
 <p>1/ hyperfine 2.0 is out. The command-line benchmarking tool now shows wall-clock time AND peak memory by default — and can track instructions, CPU cycles, cache misses, and branch misses too. 🧵
 2/ Pick what you measure with the new <code>--metrics</code> option. The terminal output gives an overview of every metric you select.
 3/ New <code>--env</code>: set env vars per benchmark without a shell.
@@ -31,7 +33,7 @@ Based only on the public README and release notes: <a rel="noopener" href="https
 4/ Commands now run directly by default (<code>--shell=none</code>) — no shell startup overhead to correct for. Need pipes or globs? Add <code>-S</code>.
 5/ Heads up: JSON export moved to schema v2 with metadata, per-run measurements, and summaries for every metric. <code>results[i].mean</code> → <code>results[i].summary.time_wall_clock.mean</code>.
 6/ Still everything you rely on: warmups, cache-clearing prepare commands, outlier detection, parameter scans, CSV/JSON/Markdown export. Release notes + migration: github.com/sharkdp/hyperfine/releases/tag/v2.0.0</p>
-<h3>Follow-ups (5)</h3>
+<h4>Follow-ups (5)</h4>
 <ol>
 <li>Compare two git branches without timing the checkout: <code>hyperfine --parameter-list branch main,perf --setup 'git switch {branch}' 'python main.py'</code></li>
 <li>Cold-cache vs warm-cache: <code>--warmup 3</code> for warm, <code>--prepare</code> to drop caches before each run. Same tool, honest numbers.</li>
@@ -39,28 +41,28 @@ Based only on the public README and release notes: <a rel="noopener" href="https
 <li><code>hyperfine -L compiler g++,clang++ '{compiler} -O2 main.cpp'</code> — non-numeric parameter lists in one line.</li>
 <li>What metric are you adding to your benchmarks now that peak memory is on by default? Reply with your favorite hyperfine flag.</li>
 </ol>
-<h2>Product Hunt</h2>
+<h3>Product Hunt</h3>
 <ul>
 <li>Name: hyperfine 2.0</li>
 <li>Tagline (≤60): Command-line benchmarking: time, memory and HW counters</li>
 <li>Description: hyperfine benchmarks any command with statistical analysis across many runs. Version 2.0 adds peak memory by default, selectable metrics (instructions, CPU cycles, cache and branch misses), <code>--env</code> for per-run variables, and direct execution without a shell. Warmups, cache-clearing, outlier detection, parameter scans, and CSV/JSON/Markdown export included. Cross-platform.</li>
 <li>First comment: Suggested maker comment, to be written by the maintainers in their own words: explain that hyperfine was made to answer "which command is faster?" with statistics rather than a single <code>time</code> run; summarize 2.0 (peak memory shown by default, hardware counters via <code>--metrics</code>, no intermediate shell by default with <code>-S</code> to restore it, JSON export with per-run measurements for every metric); point script authors to the migration notes; ask which metrics matter most in their workflow.</li>
 </ul>
-<h2>Show HN (Show HN posts must come from the maker)</h2>
+<h3>Show HN (Show HN posts must come from the maker)</h3>
 <p>Title: Show HN: Hyperfine 2.0 – CLI benchmarking with memory and hardware counters
 Text: Hyperfine is a command-line benchmarking tool. You give it commands; it runs each many times, does statistical analysis, detects outliers, and can compare them. 2.0 adds alternative metrics: peak memory is shown by default, and <code>--metrics</code> selects instructions, CPU cycles, cache misses, branch misses. Commands now run without an intermediate shell by default, which removes the shell-overhead correction for fast commands (<code>-S</code> restores the old behavior). <code>--env</code> sets variables per run, and the JSON export is a new schema with per-run data for all metrics — a breaking change for scripts. Feedback on the new defaults welcome.</p>
-<h2>Reddit</h2>
+<h3>Reddit</h3>
 <ul>
 <li>r/rust — "hyperfine 2.0: benchmark CLI commands with peak memory and hardware counters" — angle: Rust-built tool, focus on <code>--metrics</code> and direct exec rationale; link to the issue explaining the shell change.</li>
 <li>r/commandline — "hyperfine 2.0 released — <code>--metrics</code>, <code>--env</code>, no shell by default" — angle: practical one-liners (branch compare, -L lists, warmup vs prepare).</li>
 <li>r/programming — "Benchmarking beyond wall-clock: hyperfine 2.0" — angle: why measuring memory/instructions alongside time gives a fuller picture; link to release notes.
 Each post body would follow: what changed → 2 commands → breaking changes → link → maker disclosure.</li>
 </ul>
-<h2>Release notes (condensed)</h2>
+<h3>Release notes (condensed)</h3>
 <p><strong>hyperfine 2.0.0</strong> — measure more than time.
 - Added: <code>--metrics</code> (peak memory, instructions, CPU cycles, cache/branch misses); peak memory shown by default; <code>--env</code>; plotting/analysis scripts support metrics.
 - Breaking: direct execution by default (<code>--shell=none</code>; use <code>-S</code>); setup/prepare/conclude/cleanup always run in a shell; JSON export schema v2.</p>
-<h2>7-day schedule</h2>
+<h3>7-day schedule</h3>
 <table>
 <thead>
 <tr>
@@ -111,27 +113,27 @@ Each post body would follow: what changed → 2 commands → breaking changes �
 <td></td>
 </tr>
 </tbody>
-</table></div></section>
-<section id="uv"><div class="wrap kit"><h1>Here's how we'd launch uv 0.13.1</h1>
+</table><p><a href="#top">↑ Back to sample list</a></p></div></section>
+<section id="uv" class="kitsec"><div class="wrap kit"><h2 class="kit-title">uv 0.13.1</h2><p class='lede'>Here's how we'd launch uv 0.13.1.</p>
 <blockquote>
 <p><strong>Unofficial sample: not written, reviewed, or endorsed by the uv maintainers. Not affiliated.</strong>
 Based only on the public README and release notes: <a rel="noopener" href="https://github.com/astral-sh/uv">https://github.com/astral-sh/uv</a> · <a rel="noopener" href="https://github.com/astral-sh/uv/releases/tag/0.13.1">release notes</a>. Drafts below are written as suggestions for the maintainers; Dev Hype has not posted any of them.</p>
 </blockquote>
-<h2>Positioning brief</h2>
+<h3>Positioning brief</h3>
 <ul>
 <li>For: Python devs juggling pip, pip-tools, pipx, poetry, pyenv, virtualenv; vibe coders running one-off scripts.</li>
 <li>Problem: too many tools, slow installs.</li>
 <li>Hook: one Rust-built tool for Python packages, projects, scripts, tools and Python versions.</li>
 <li>Proof (README): "10-100x faster than pip" (links BENCHMARKS.md); universal lockfile; inline script metadata; workspaces; global cache; macOS/Linux/Windows; installs via curl or pip. 0.13.1: smaller binary, faster Simple API parsing, CPython 3.16.0a1, Linux SPARC, safer uninstalls.</li>
 </ul>
-<h2>X thread (draft for the maintainers to post)</h2>
+<h3>X thread (draft for the maintainers to post)</h3>
 <p>1/ uv 0.13.1 just shipped: smaller binary, faster Simple API parsing, and CPython 3.16.0a1 available. If you haven't tried uv yet, here's the short version 🧵
 2/ uv is one tool to replace pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv and more. Written in Rust; its README cites 10-100x faster than pip (benchmarks linked).
 3/ Projects: <code>uv init</code>, <code>uv add ruff</code>, <code>uv run ruff check</code>, <code>uv lock</code>, <code>uv sync</code>. Universal lockfile, Cargo-style workspaces.
 4/ Scripts: declare dependencies inline in a single file and <code>uv run</code> it. Great for quick automations.
 5/ Also new in 0.13.1: Linux SPARC support, missing trusted hashes reported in resolution errors, and tool/Python uninstalls no longer touch unrelated neighboring files.
 6/ Install: <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code> or <code>pip install uv</code>. Already have it? <code>uv self update</code>. Notes: github.com/astral-sh/uv/releases/tag/0.13.1</p>
-<h3>Follow-ups</h3>
+<h4>Follow-ups</h4>
 <ol>
 <li><code>uv self update</code> — if you used the standalone installer, that's the whole upgrade.</li>
 <li>Try Python 3.16.0a1 in a throwaway env with uv's managed Python versions.</li>
@@ -139,7 +141,7 @@ Based only on the public README and release notes: <a rel="noopener" href="https
 <li>Preview: <code>uv tool upgrade</code> now works with <code>tool-install-locks</code> enabled.</li>
 <li>What did uv replace in your stack? pipx? pyenv? poetry? Reply below.</li>
 </ol>
-<h2>Product Hunt</h2>
+<h3>Product Hunt</h3>
 <ul>
 <li>Name: uv</li>
 <li>Tagline: Fast Python package and project manager, written in Rust</li>
@@ -147,18 +149,18 @@ Based only on the public README and release notes: <a rel="noopener" href="https
 <li>First comment: Suggested maker comment, to be written by the maintainers: uv's goal of being a single tool for Python packaging; what 0.13.1 adds (smaller binary, faster index parsing, CPython 3.16.0a1, Linux SPARC); ask which workflow readers would move to uv first and where it falls short.</li>
 <li>Note: uv is established; PH may suit a major version better than a patch. We would flag this to the maintainers.</li>
 </ul>
-<h2>Show HN (Show HN posts must come from the maker)</h2>
+<h3>Show HN (Show HN posts must come from the maker)</h3>
 <p>Title: Show HN: uv 0.13.1 – Python package manager, smaller and faster parsing
 Our note: HN discourages reposting well-known projects for patch releases; recommend skipping Show HN for 0.13.1 and saving it for a major release. Draft kept: "uv is a Python package and project manager written in Rust... (README highlights) ... This release reduces binary size, speeds Simple API parsing, adds CPython 3.16.0a1. Feedback welcome."</p>
-<h2>Reddit</h2>
+<h3>Reddit</h3>
 <ul>
 <li>r/Python — "uv 0.13.1 released: smaller binary, faster index parsing, CPython 3.16.0a1" (check sub's release-post rules/flair).</li>
 <li>r/learnpython — angle: "one tool instead of venv+pip+pyenv" beginner walkthrough using README project example (no release spam).
 Each post body would follow: summary → commands → link → maker disclosure.</li>
 </ul>
-<h2>Release notes (condensed)</h2>
+<h3>Release notes (condensed)</h3>
 <p><strong>uv 0.13.1</strong> — Enhancements: ignore Requires-Python upper bounds in <code>uv pip check</code>/<code>--strict</code>; Linux SPARC; report missing trusted hashes. Python: CPython 3.16.0a1. Preview: <code>uv tool upgrade</code> with tool-install-locks; PEP 825 variant labels parsing. Performance: smaller binary; faster Simple API parsing; less metadata parsing overhead. Fixes: uninstalls no longer delete unrelated adjacent files.</p>
-<h2>7-day schedule</h2>
+<h3>7-day schedule</h3>
 <table>
 <thead>
 <tr>
@@ -204,27 +206,27 @@ Each post body would follow: summary → commands → link → maker disclosure.
 <td>PH/HN held for major release</td>
 </tr>
 </tbody>
-</table></div></section>
-<section id="gum" class="alt"><div class="wrap kit"><h1>Here's how we'd launch gum v2.0.2</h1>
+</table><p><a href="#top">↑ Back to sample list</a></p></div></section>
+<section id="gum" class="kitsec"><div class="wrap kit"><h2 class="kit-title">gum v2.0.2</h2><p class='lede'>Here's how we'd launch gum v2.0.2.</p>
 <blockquote>
 <p><strong>Unofficial sample: not written, reviewed, or endorsed by the gum maintainers. Not affiliated.</strong>
 Based only on the public README and release notes: <a rel="noopener" href="https://github.com/charmbracelet/gum">https://github.com/charmbracelet/gum</a> · <a rel="noopener" href="https://github.com/charmbracelet/gum/releases/tag/v2.0.2">release notes</a>. Drafts below are written as suggestions for the maintainers; Dev Hype has not posted any of them.</p>
 </blockquote>
-<h2>Positioning brief</h2>
+<h3>Positioning brief</h3>
 <ul>
 <li>For: people writing shell scripts and dotfile aliases who want interactive prompts without writing Go.</li>
 <li>Problem: shell scripts are ugly and hard to make interactive.</li>
 <li>Hook: "A tool for glamorous shell scripts" — choose, input, write, confirm in one line each.</li>
 <li>Proof (README): built on Bubbles and Lip Gloss; tutorial builds a Conventional Commits helper; packages for brew, pacman, dnf, nix, flox, winget, scoop, apt, yum, FreeBSD; binaries for Linux, macOS, Windows, FreeBSD, OpenBSD, NetBSD. v2.0.2: fixes raw ANSI capability sequences leaking (Bubble Tea v2 bump).</li>
 </ul>
-<h2>X thread (draft for the maintainers to post)</h2>
+<h3>X thread (draft for the maintainers to post)</h3>
 <p>1/ Make your shell scripts glamorous. gum gives you menus, inputs, text areas and confirm prompts — one command each, no Go code. 🧵
 2/ Pick from a list: <code>gum choose "fix" "feat" "docs" "chore"</code>
 3/ Ask for text: <code>gum input --placeholder "scope"</code> — or multi-line with <code>gum write</code>.
 4/ Guard the dangerous stuff: <code>gum confirm "Commit changes?" &amp;&amp; git commit -m "$SUMMARY"</code>
 5/ Chain them and you get a full Conventional Commits helper in a short script — the README walks through it.
 6/ v2.0.2 fixes raw ANSI sequences leaking in non-input programs. <code>brew install gum</code> (or pacman, dnf, nix, winget, scoop…). github.com/charmbracelet/gum</p>
-<h3>Follow-ups</h3>
+<h4>Follow-ups</h4>
 <ol>
 <li>Save output to a variable: <code>TYPE=$(gum choose fix feat docs)</code> — gum prints the choice to stdout.</li>
 <li>Dotfile idea: wrap your most-used git alias in <code>gum confirm</code>.</li>
@@ -232,7 +234,7 @@ Based only on the public README and release notes: <a rel="noopener" href="https
 <li>Built on Bubbles + Lip Gloss — the same Charm libraries, from Bash.</li>
 <li>What's the first script you'd gum-ify? Share it.</li>
 </ol>
-<h2>Product Hunt</h2>
+<h3>Product Hunt</h3>
 <ul>
 <li>Name: Gum</li>
 <li>Tagline: Glamorous, interactive shell scripts — no Go required</li>
@@ -240,18 +242,18 @@ Based only on the public README and release notes: <a rel="noopener" href="https
 <li>First comment: Suggested maker comment, to be written by the maintainers: why Gum exists (Charm's TUI polish for people writing Bash, without Go); the v2.0.2 fix for stray ANSI output; ask what scripts people build with it.</li>
 <li>Note: patch release; PH best paired with a feature release.</li>
 </ul>
-<h2>Show HN (Show HN posts must come from the maker)</h2>
+<h3>Show HN (Show HN posts must come from the maker)</h3>
 <p>Title: Show HN: Gum – interactive prompts for shell scripts without writing Go
 Text: Gum is a CLI that exposes TUI components (choose, input, write, confirm) as commands you call from shell scripts. Example: a Conventional Commits helper built from four gum calls (README). Built on Bubbles/Lip Gloss. Latest is v2.0.2. Feedback welcome. (Caveat: likely posted before; the maintainers would decide.)</p>
-<h2>Reddit</h2>
+<h3>Reddit</h3>
 <ul>
 <li>r/commandline — "Gum: menus and prompts for your shell scripts in one command each" — commit-helper walkthrough.</li>
 <li>r/unixporn or r/dotfiles — angle: dotfile aliases with gum confirm/choose (check showcase rules).</li>
 <li>r/bash — practical: capturing gum output in variables.</li>
 </ul>
-<h2>Release notes (condensed)</h2>
+<h3>Release notes (condensed)</h3>
 <p><strong>gum v2.0.2</strong> — Fixed: raw ANSI capability sequences no longer leak in no-input programs (Bubble Tea bump, #1155, @andrinoff).</p>
-<h2>7-day schedule</h2>
+<h3>7-day schedule</h3>
 <table>
 <thead>
 <tr>
@@ -297,6 +299,6 @@ Text: Gum is a CLI that exposes TUI components (choose, input, write, confirm) a
 <td></td>
 </tr>
 </tbody>
-</table></div></section>
+</table><p><a href="#top">↑ Back to sample list</a></p></div></section>
 <section><div class="wrap" style="text-align:center"><a class="btn" href="index.html#dev-hype">Get your own Launch Kit</a></div></section>
 <footer><div class="wrap">&copy; 2026 Dev Hype · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:norcalcracks@gmail.com">norcalcracks@gmail.com</a><br>Payments are processed by Lemon Squeezy, our merchant of record.</div></footer></body></html>
