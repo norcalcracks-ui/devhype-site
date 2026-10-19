@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Launch Check Mini-Check: Scan Your Site Before Launch — Dev Hype</title>
+<meta name="description" content="Free, passive mini-check for AI-built and vibe-coded sites: leaked API keys, placeholder checkout links, mixed content, missing security headers and broken links. Results in seconds.">
+<link rel="canonical" href="https://devhype.info/mini-check.html">
+<meta property="og:type" content="website"><meta property="og:title" content="Free Launch Check Mini-Check">
+<meta property="og:description" content="Paste your URL. In about 20 seconds, see leaked keys, placeholder buy buttons, mixed content, missing headers and broken links.">
+<meta property="og:url" content="https://devhype.info/mini-check.html"><meta name="twitter:card" content="summary">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#1a1a1a;line-height:1.6;background:#fafafa}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}header{background:#111;color:#fff;padding:14px 0}header a{color:#fff;text-decoration:none;margin-left:18px}header .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.hero{background:linear-gradient(135deg,#111,#2b2f77);color:#fff;padding:70px 0;text-align:center}.hero h1{font-size:2.4rem;margin:0 0 12px}
+section{padding:50px 0}h2{font-size:1.8rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:22px}.price{font-size:1.8rem;font-weight:700}
+.btn{display:inline-block;background:#4f46e5;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:10px}.btn:hover{background:#3730a3}
+.alt{background:#fff;border-top:1px solid #eee;border-bottom:1px solid #eee}.feat{border:2px solid #4f46e5}
+footer{background:#111;color:#bbb;padding:24px 0;font-size:.9rem}footer a{color:#ddd}small{color:#666}
+ol.check>li{margin-bottom:14px}ol.check .how{display:block;color:#444}.toc a{margin-right:14px}
+.scan{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}.scan input{flex:1;min-width:240px;max-width:520px;padding:11px 14px;border-radius:8px;border:0;font-size:1rem}
+.scan button{border:0;cursor:pointer;font-size:1rem;margin-top:0}.scan button[disabled]{opacity:.6;cursor:wait}
+.sev{display:inline-block;font-size:.75rem;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:8px;color:#fff}
+.sev.critical{background:#b91c1c}.sev.high{background:#c2410c}.sev.medium{background:#a16207}.sev.low{background:#4b5563}
+.verdict{font-size:1.5rem;font-weight:700;margin:0 0 6px}ul.issues{padding-left:0;list-style:none}ul.issues li{border-top:1px solid #eee;padding:12px 0}
+.fix{display:block;color:#444}.muted{color:#666;font-size:.92rem}.err{color:#b91c1c;font-weight:600}
+</style>
+</head><body>
+<header><div class="wrap"><strong><a href="index.html" style="margin:0">Dev Hype</a></strong><nav><a href="index.html#launch-check">Launch Check</a><a href="index.html#dev-hype">Dev Hype</a><a href="samples.html">Samples</a><a href="index.html#bundle">Bundle</a><a href="index.html#contact">Contact</a></nav></div></header>
+<div class="hero"><div class="wrap"><h1>Free Launch Check Mini-Check</h1><p>Paste your live URL. In about 20 seconds we look at that one public page for the most common launch problems in AI-built apps.</p>
+<form class="scan" id="f"><label for="u" style="position:absolute;left:-9999px">Your site URL</label><input id="u" name="url" type="text" inputmode="url" autocomplete="url" placeholder="https://yourapp.com" required><button class="btn" id="go" type="submit">Run free check</button></form>
+<p class="muted" style="color:#ccc;margin-top:12px">Free, no signup. Passive only: we just load your page like a browser would.</p></div></div>
+
+<section id="result" hidden><div class="wrap"><div class="card" id="out" aria-live="polite"></div></div></section>
+
+<section class="alt"><div class="wrap"><h2>What the mini-check looks at</h2><div class="grid">
+<div class="card"><h3>Leaked keys</h3><p>Secret API keys in your page and same-site scripts: Stripe, OpenAI, Anthropic, AWS, GitHub, Slack, Supabase service_role and private keys. Anything found is shown redacted.</p></div>
+<div class="card"><h3>Placeholder buttons</h3><p>Buy, checkout and signup links still pointing at example.com, localhost, <code>#</code> or a leftover placeholder like <code>LS_CHECKOUT_URL</code>.</p></div>
+<div class="card"><h3>Mixed content</h3><p>Scripts, styles and images loaded over plain <code>http://</code> on an https page.</p></div>
+<div class="card"><h3>Security headers</h3><p>HSTS, Content-Security-Policy, X-Content-Type-Options, clickjacking protection and Referrer-Policy.</p></div>
+<div class="card"><h3>Broken links</h3><p>Up to 25 links on the page, your own first. If a link times out or fails a secure connection, we say we couldn’t check it instead of calling it broken.</p></div>
+</div>
+<p class="muted">How it works: we only make normal GET and HEAD requests. We don’t submit forms, sign up, log in or test for exploits. We don’t store your results; we keep only basic server logs. We won’t scan private or internal addresses.</p></div></section>
+
+<section id="audit"><div class="wrap"><div class="card feat" style="text-align:center"><h2>Want the whole launch checked?</h2><p>The mini-check covers one page and five things. The <strong>$49 Standard Audit</strong> covers your full site and, optionally, your repo: database rules, auth, payments end to end, SEO and indexing, legal pages, copy and mobile. You get a one-page report with a No-go / Go with fixes / Go verdict and a ranked fix list within 24 hours.</p><a class="btn" href="https://buy.stripe.com/28E8wHeKY7cWcnQ1D46AM08">Buy Standard Audit — $49</a><p style="font-size:.9em;opacity:.75">Secure checkout by Stripe. Every report is reviewed by a person before it goes out, and any copy of your repo we take for the audit is deleted once the audit is done.</p><p><a href="prelaunch-checklist.html">Or work through the free pre-launch checklist yourself</a></p></div></div></section>
+<footer><div class="wrap">© Dev Hype · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div></footer>
+<script>
+(function(){
+var API="https://launch-check-mini-billy-f05f.vercel.app/api/scan";var BUY="https://buy.stripe.com/28E8wHeKY7cWcnQ1D46AM08";
+var f=document.getElementById('f'),u=document.getElementById('u'),go=document.getElementById('go'),sec=document.getElementById('result'),out=document.getElementById('out');
+function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;}
+var q=new URLSearchParams(location.search).get('url');if(q)u.value=q;
+f.addEventListener('submit',function(ev){ev.preventDefault();var url=u.value.trim();if(!url)return;
+go.disabled=true;go.textContent='Checking…';sec.hidden=false;out.textContent='';out.appendChild(el('p','muted','Checking '+url+' … this takes up to about 20 seconds.'));
+fetch(API+'?url='+encodeURIComponent(url)).then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});}).then(function(x){
+out.textContent='';if(!x.ok||x.j.error){out.appendChild(el('p','err',x.j.error||'The check failed. Please try again.'));return;}
+var r=x.j;out.appendChild(el('p','verdict',r.verdict));out.appendChild(el('p',null,r.summary));
+out.appendChild(el('p','muted','Checked '+r.finalUrl+(r.redirects?' (after '+r.redirects+' redirect'+(r.redirects>1?'s':'')+')':'')));
+if(r.issues.length){var ul=el('ul','issues');r.issues.forEach(function(i){var li=el('li');li.appendChild(el('span','sev '+i.sev,i.sev));li.appendChild(el('strong',null,i.title));li.appendChild(el('span','fix',i.detail));var fx=el('span','fix');fx.appendChild(el('strong',null,'Fix: '));fx.appendChild(document.createTextNode(i.fix));li.appendChild(fx);ul.appendChild(li);});out.appendChild(ul);
+if(r.moreIssues)out.appendChild(el('p','muted','+'+r.moreIssues+' more smaller issue'+(r.moreIssues>1?'s':'')+' not shown.'));}
+if(r.passed.length){out.appendChild(el('h3',null,'Looks good'));var p=el('ul');r.passed.forEach(function(t){p.appendChild(el('li',null,t));});out.appendChild(p);}
+if(r.couldntCheck.length){out.appendChild(el('h3',null,'Couldn’t check'));var c=el('ul');r.couldntCheck.forEach(function(t){c.appendChild(el('li','muted',t));});out.appendChild(c);}
+out.appendChild(el('p','muted',r.notChecked));
+var cta=el('div');cta.style.cssText='text-align:center;margin-top:10px';cta.appendChild(el('p',null,r.issues.length?'Want every issue found and ranked, across your whole site and repo?':'The basics look good. Want the rest of the launch checked before you post?'));var a=el('a','btn','Get the $49 Standard Audit');a.href=BUY;cta.appendChild(a);out.appendChild(cta);
+}).catch(function(){out.textContent='';out.appendChild(el('p','err','Couldn’t reach the checker. Please try again in a minute.'));}).then(function(){go.disabled=false;go.textContent='Run free check';});});
+})();
+</script>
+<script data-goatcounter="https://devhype.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body></html>
